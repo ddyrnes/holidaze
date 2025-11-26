@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string) => {
     // TODO: Implement login logic with API
-    console.log("Login:", email, password);
   };
 
   const logout = () => {
@@ -45,7 +44,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     venueManager: boolean
   ) => {
     // TODO: Implement registration logic with API
-    console.log("Register:", name, email, venueManager);
   };
 
   const value = {
