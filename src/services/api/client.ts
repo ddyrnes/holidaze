@@ -1,5 +1,6 @@
 import { API_BASE_URL, getHeaders } from "./constants";
-import type { ApiError } from "../../types/api.types";
+import type { ApiError as ApiErrorType } from "../../types/api.types";
+import { ApiError } from "../../utils/ApiError";
 
 type HttpMethod = "GET" | "POST" | "PUT" | "DELETE";
 
@@ -27,13 +28,18 @@ class ApiClient {
     }
 
     const response = await fetch(url, config);
-    const data = await response.json();
 
     if (!response.ok) {
-      const error: ApiError = data;
-      throw new Error(error.errors?.[0]?.message || "An error occurred");
+      let errorData: ApiErrorType = { errors: [], status: "", statusCode: 0 };
+      try {
+        errorData = await response.json();
+      } catch {
+        // Response may not be JSON
+      }
+      throw new ApiError(response.status, response.statusText, errorData.errors);
     }
 
+    const data = await response.json();
     return data;
   }
 

@@ -21,9 +21,17 @@ export const theme = {
     
     status: {
       success: "#4E9B70",
+      successLight: "#ECFDF5",
+      successHover: "#3D7A59",
       warning: "#E39E3A",
+      warningLight: "#FFFBEB",
+      warningHover: "#C4872E",
       error: "#D94F4F",
+      errorLight: "#FEF2F2",
+      errorHover: "#B91C1C",
       info: "#0EA5E9",
+      infoLight: "#EFF6FF",
+      infoHover: "#0284C7",
       disabled: "#9BA5A0",
     },
     
