@@ -18,14 +18,13 @@ export const login = async (
   credentials: LoginCredentials
 ): Promise<AuthResponse> => {
   const response = await apiClient.post<AuthResponse>(
-    API_ENDPOINTS.auth.login,
+    `${API_ENDPOINTS.auth.login}?_holidaze=true`,
     credentials
   );
 
   if (response.data.accessToken) {
     localStorage.setItem("accessToken", response.data.accessToken);
-    localStorage.setItem("userName", response.data.name);
-    localStorage.setItem("userEmail", response.data.email);
+    localStorage.setItem("user", JSON.stringify(response.data));
   }
 
   return response;
@@ -47,6 +46,5 @@ export const createApiKey = async (): Promise<{
 
 export const logout = (): void => {
   localStorage.removeItem("accessToken");
-  localStorage.removeItem("userName");
-  localStorage.removeItem("userEmail");
+  localStorage.removeItem("user");
 };

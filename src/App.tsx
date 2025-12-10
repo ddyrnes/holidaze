@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import HomePage from "./pages/HomePage";
 import VenueDetailPage from "./pages/VenueDetailPage";
 import LoginPage from "./pages/LoginPage";
@@ -18,13 +19,51 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/venues/:id" element={<VenueDetailPage />} />
-          <Route path="/venues/:id/book" element={<BookingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/manager/venues" element={<ManagerVenuesPage />} />
-          <Route path="/manager/venues/create" element={<CreateVenuePage />} />
-          <Route path="/manager/venues/:id/edit" element={<EditVenuePage />} />
+
+          <Route
+            path="/venues/:id/book"
+            element={
+              <ProtectedRoute>
+                <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/manager/venues"
+            element={
+              <ProtectedRoute requireManager>
+                <ManagerVenuesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manager/venues/create"
+            element={
+              <ProtectedRoute requireManager>
+                <CreateVenuePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manager/venues/:id/edit"
+            element={
+              <ProtectedRoute requireManager>
+                <EditVenuePage />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>

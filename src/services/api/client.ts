@@ -34,7 +34,7 @@ class ApiClient {
       try {
         errorData = await response.json();
       } catch {
-        // Response may not be JSON
+        // Silent catch - response may not be JSON
       }
       throw new ApiError(response.status, response.statusText, errorData.errors);
     }
