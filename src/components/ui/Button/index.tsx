@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 type ButtonVariant = "primary" | "secondary" | "danger";
 
 interface ButtonProps {
-  variant?: ButtonVariant;
-  fullWidth?: boolean;
+  $variant?: ButtonVariant;
+  $fullWidth?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -19,7 +19,7 @@ const Button = styled.button<ButtonProps>`
   border-radius: ${({ theme }) => theme.borderRadius.button};
   cursor: pointer;
   transition: all ${({ theme }) => theme.transitions.fast};
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
 
   &:disabled {
     opacity: 0.6;
@@ -31,8 +31,8 @@ const Button = styled.button<ButtonProps>`
     box-shadow: ${({ theme }) => theme.shadows.focus};
   }
 
-  ${({ variant = "primary", theme }) => {
-    switch (variant) {
+  ${({ $variant = "primary", theme }) => {
+    switch ($variant) {
       case "secondary":
         return css`
           background: transparent;
@@ -69,4 +69,5 @@ const Button = styled.button<ButtonProps>`
 `;
 
 export default Button;
+
 

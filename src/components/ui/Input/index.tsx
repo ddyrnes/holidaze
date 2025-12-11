@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { forwardRef, type InputHTMLAttributes } from "react";
 
 interface InputWrapperProps {
-  hasError?: boolean;
+  $hasError?: boolean;
 }
 
 export const InputWrapper = styled.div`
@@ -24,16 +24,16 @@ export const StyledInput = styled.input<InputWrapperProps>`
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   background: ${({ theme }) => theme.colors.card};
   border: 1px solid
-    ${({ theme, hasError }) =>
-      hasError ? theme.colors.status.error : "transparent"};
+    ${({ theme, $hasError }) =>
+      $hasError ? theme.colors.status.error : "transparent"};
   border-radius: ${({ theme }) => theme.borderRadius.button};
   transition: all ${({ theme }) => theme.transitions.fast};
 
   &:focus {
     outline: none;
     box-shadow: ${({ theme }) => theme.shadows.focus};
-    border-color: ${({ theme, hasError }) =>
-      hasError ? theme.colors.status.error : theme.colors.brand.primary};
+    border-color: ${({ theme, $hasError }) =>
+      $hasError ? theme.colors.status.error : theme.colors.brand.primary};
   }
 
   &::placeholder {
@@ -62,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <InputWrapper>
         <Label htmlFor={id}>{label}</Label>
-        <StyledInput id={id} hasError={!!error} ref={ref} {...props} />
+        <StyledInput id={id} $hasError={!!error} ref={ref} {...props} />
         {error && <ErrorText>{error}</ErrorText>}
       </InputWrapper>
     );

@@ -27,3 +27,4 @@ function ProtectedRoute({ children, requireManager = false }: ProtectedRouteProp
 
 export default ProtectedRoute;
 
+

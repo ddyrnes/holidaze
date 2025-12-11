@@ -115,7 +115,7 @@ function RegisterPage() {
               {...register("venueManager")}
             />
           </S.CheckboxWrapper>
-          <Button type="submit" fullWidth disabled={isSubmitting}>
+          <Button type="submit" $fullWidth disabled={isSubmitting}>
             {isSubmitting ? "Creating account..." : "Create Account"}
           </Button>
         </S.Form>
