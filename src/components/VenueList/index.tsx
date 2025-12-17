@@ -1,13 +1,7 @@
 import type { Venue } from "../../types/api.types";
 import VenueCard from "../VenueCard";
-import {
-  Grid,
-  EmptyState,
-  SkeletonCard,
-  SkeletonImage,
-  SkeletonContent,
-  SkeletonLine,
-} from "./VenueList.styles";
+import { SkeletonBox, SkeletonLine, SkeletonImage } from "../ui";
+import { Grid, EmptyState, SkeletonCard, SkeletonContent } from "./VenueList.styles";
 
 interface VenueListProps {
   venues: Venue[];
@@ -24,7 +18,7 @@ function VenueListSkeleton() {
           <SkeletonContent>
             <SkeletonLine $width="80%" $height="20px" />
             <SkeletonLine $width="60%" />
-            <SkeletonLine $width="40%" $height="24px" />
+            <SkeletonBox $width="40%" $height="24px" />
           </SkeletonContent>
         </SkeletonCard>
       ))}

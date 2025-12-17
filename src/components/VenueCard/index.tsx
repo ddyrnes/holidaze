@@ -98,3 +98,5 @@ function VenueCard({ venue }: VenueCardProps) {
 
 export default VenueCard;
 
+
+
