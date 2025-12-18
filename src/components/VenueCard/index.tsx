@@ -29,7 +29,7 @@ function VenueCard({ venue }: VenueCardProps) {
     .join(", ");
 
   const handleClick = () => {
-    navigate(`/venue/${venue.id}`);
+    navigate(`/venues/${venue.id}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -97,6 +97,3 @@ function VenueCard({ venue }: VenueCardProps) {
 }
 
 export default VenueCard;
-
-
-
