@@ -27,10 +27,8 @@ export const HeroTitle = styled.h1`
 export const HeroSubtitle = styled.p`
   font-size: ${({ theme }) => theme.typography.fontSize.lg};
   color: ${({ theme }) => theme.colors.status.disabled};
-  margin: 0;
+  margin: 0 auto ${({ theme }) => theme.spacing.xl};
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 export const Section = styled.section`
@@ -56,7 +54,4 @@ export const VenueCount = styled.span`
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   color: ${({ theme }) => theme.colors.status.disabled};
 `;
-
-
-
 
