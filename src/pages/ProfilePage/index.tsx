@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
-import { updateProfile } from "../../services/api/profiles";
-import { Button, Input } from "../../components/ui";
+import { updateProfile, getUserBookings } from "../../services/api/profiles";
+import type { Booking } from "../../types/api.types";
+import { Button, Input, SkeletonBox } from "../../components/ui";
 import { showSuccess, showError } from "../../utils";
 import * as S from "./ProfilePage.styles";
 
@@ -13,8 +15,11 @@ interface AvatarFormData {
 
 function ProfilePage() {
   const { user, updateUser } = useAuth();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("");
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [isLoadingBookings, setIsLoadingBookings] = useState(true);
 
   const {
     register,
@@ -47,6 +52,23 @@ function ProfilePage() {
       setPreviewUrl("");
     }
   }, [watchUrl]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      if (!user) return;
+
+      try {
+        const response = await getUserBookings(user.name);
+        setBookings(response.data);
+      } catch {
+        showError("Failed to load bookings");
+      } finally {
+        setIsLoadingBookings(false);
+      }
+    };
+
+    fetchBookings();
+  }, [user]);
 
   const onSubmit = async (data: AvatarFormData) => {
     if (!user) return;
@@ -81,6 +103,25 @@ function ProfilePage() {
   }
 
   const getInitial = (name: string) => name.charAt(0).toUpperCase();
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const isPastBooking = (dateTo: string) => {
+    return new Date(dateTo) < new Date();
+  };
+
+  const sortedBookings = [...bookings].sort((a, b) => {
+    const aIsPast = isPastBooking(a.dateTo);
+    const bIsPast = isPastBooking(b.dateTo);
+    if (aIsPast !== bIsPast) return aIsPast ? 1 : -1;
+    return new Date(a.dateFrom).getTime() - new Date(b.dateFrom).getTime();
+  });
 
   return (
     <S.Container>
@@ -147,6 +188,56 @@ function ProfilePage() {
             </Button>
           </S.ButtonGroup>
         </S.Form>
+      </S.Section>
+
+      <S.Section>
+        <S.SectionTitle>My Bookings</S.SectionTitle>
+        {isLoadingBookings ? (
+          <S.LoadingState>
+            {[1, 2, 3].map((i) => (
+              <SkeletonBox key={i} height="96px" />
+            ))}
+          </S.LoadingState>
+        ) : sortedBookings.length === 0 ? (
+          <S.EmptyState>
+            <p>You haven't made any bookings yet.</p>
+            <S.ViewButton onClick={() => navigate("/")}>
+              Browse venues
+            </S.ViewButton>
+          </S.EmptyState>
+        ) : (
+          <S.BookingsList>
+            {sortedBookings.map((booking) => (
+              <S.BookingCard key={booking.id}>
+                {booking.venue?.media?.[0]?.url ? (
+                  <S.BookingImage
+                    src={booking.venue.media[0].url}
+                    alt={booking.venue.media[0].alt || booking.venue.name}
+                  />
+                ) : (
+                  <S.BookingImagePlaceholder>No image</S.BookingImagePlaceholder>
+                )}
+                <S.BookingDetails>
+                  <S.BookingVenueName>
+                    {booking.venue?.name || "Unknown venue"}
+                  </S.BookingVenueName>
+                  <S.BookingDates>
+                    {formatDate(booking.dateFrom)} - {formatDate(booking.dateTo)}
+                  </S.BookingDates>
+                  <S.BookingGuests>
+                    {booking.guests} {booking.guests === 1 ? "guest" : "guests"}
+                  </S.BookingGuests>
+                  <S.BookingStatus $isPast={isPastBooking(booking.dateTo)}>
+                    {isPastBooking(booking.dateTo) ? "Completed" : "Upcoming"}
+                  </S.BookingStatus>
+                </S.BookingDetails>
+                <S.ViewButton onClick={() => navigate(`/venues/${booking.venue?.id}`)}>
+                  View venue
+                </S.ViewButton>
+              </S.BookingCard>
+            ))}
+          </S.BookingsList>
+        )}
       </S.Section>
     </S.Container>
   );
