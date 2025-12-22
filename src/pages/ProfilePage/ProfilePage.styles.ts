@@ -148,7 +148,7 @@ export const BookingImage = styled.img`
 export const BookingImagePlaceholder = styled.div`
   width: 100px;
   height: 80px;
-  background: ${({ theme }) => theme.colors.border};
+  background: ${({ theme }) => theme.colors.background};
   border-radius: ${({ theme }) => theme.borderRadius.button};
   flex-shrink: 0;
   display: flex;

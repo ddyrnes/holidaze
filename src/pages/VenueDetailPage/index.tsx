@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getVenueById } from "../../services/api";
 import { useAuth } from "../../context/AuthContext";
 import type { Venue } from "../../types/api.types";
 import { Button } from "../../components/ui";
 import { SkeletonBox, SkeletonLine } from "../../components/ui";
+import Calendar from "../../components/Calendar";
 import ErrorMessage from "../../components/ErrorMessage";
 import {
   Container,
@@ -52,6 +53,8 @@ function VenueDetailPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
+  const [checkOut, setCheckOut] = useState<Date | null>(null);
 
   useEffect(() => {
     const fetchVenue = async () => {
@@ -77,6 +80,27 @@ function VenueDetailPage() {
     const parts = [venue.location?.city, venue.location?.country].filter(Boolean);
     return parts.join(", ") || "Location not specified";
   };
+
+  const disabledDates = useMemo(() => {
+    if (!venue?.bookings) return [];
+    return venue.bookings.map((booking) => ({
+      from: new Date(booking.dateFrom),
+      to: new Date(booking.dateTo),
+    }));
+  }, [venue?.bookings]);
+
+  const handleDateSelect = (newCheckIn: Date | null, newCheckOut: Date | null) => {
+    setCheckIn(newCheckIn);
+    setCheckOut(newCheckOut);
+  };
+
+  const calculateNights = () => {
+    if (!checkIn || !checkOut) return 0;
+    const diff = checkOut.getTime() - checkIn.getTime();
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
+
+  const nights = calculateNights();
 
   if (isLoading) {
     return (
@@ -283,20 +307,41 @@ function VenueDetailPage() {
               <PriceLabel>/ night</PriceLabel>
             </PriceDisplay>
 
+            <Calendar
+              disabledDates={disabledDates}
+              onDateSelect={handleDateSelect}
+              checkIn={checkIn}
+              checkOut={checkOut}
+            />
+
             <BookingInfo>
               <BookingInfoRow>
                 <span>Max guests</span>
                 <span>{venue.maxGuests}</span>
               </BookingInfoRow>
-              <BookingInfoRow>
-                <span>Rating</span>
-                <span>{venue.rating > 0 ? `${venue.rating.toFixed(1)} / 5` : "No ratings yet"}</span>
-              </BookingInfoRow>
+              {nights > 0 && (
+                <>
+                  <BookingInfoRow>
+                    <span>${venue.price} × {nights} nights</span>
+                    <span>${venue.price * nights}</span>
+                  </BookingInfoRow>
+                  <BookingInfoRow>
+                    <span>Total</span>
+                    <span>${venue.price * nights}</span>
+                  </BookingInfoRow>
+                </>
+              )}
             </BookingInfo>
 
             {isAuthenticated ? (
-              <Link to={`/venues/${venue.id}/book`} style={{ textDecoration: "none" }}>
-                <Button $fullWidth>Book this venue</Button>
+              <Link
+                to={`/venues/${venue.id}/book`}
+                state={{ checkIn: checkIn?.toISOString(), checkOut: checkOut?.toISOString() }}
+                style={{ textDecoration: "none" }}
+              >
+                <Button $fullWidth disabled={!checkIn || !checkOut}>
+                  {checkIn && checkOut ? "Book this venue" : "Select dates"}
+                </Button>
               </Link>
             ) : (
               <Link to="/login" state={{ from: `/venues/${venue.id}` }} style={{ textDecoration: "none" }}>

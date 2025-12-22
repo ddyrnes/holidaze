@@ -195,7 +195,7 @@ function ProfilePage() {
         {isLoadingBookings ? (
           <S.LoadingState>
             {[1, 2, 3].map((i) => (
-              <SkeletonBox key={i} height="96px" />
+              <SkeletonBox key={i} $height="96px" />
             ))}
           </S.LoadingState>
         ) : sortedBookings.length === 0 ? (
