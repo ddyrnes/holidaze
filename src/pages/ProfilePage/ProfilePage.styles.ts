@@ -118,6 +118,23 @@ export const ButtonGroup = styled.div`
   margin-top: ${({ theme }) => theme.spacing.sm};
 `;
 
+export const LoadingState = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
+`;
+
+export const EmptyState = styled.div`
+  text-align: center;
+  padding: ${({ theme }) => theme.spacing.xl};
+  color: ${({ theme }) => theme.colors.status.disabled};
+  font-family: ${({ theme }) => theme.typography.fontFamily.body};
+
+  p {
+    margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
+  }
+`;
+
 export const BookingsList = styled.div`
   display: flex;
   flex-direction: column;
@@ -126,108 +143,98 @@ export const BookingsList = styled.div`
 
 export const BookingCard = styled.div`
   display: flex;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => theme.colors.background};
   border-radius: ${({ theme }) => theme.borderRadius.button};
-  transition: box-shadow ${({ theme }) => theme.transitions.fast};
 
-  &:hover {
-    box-shadow: ${({ theme }) => theme.shadows.card};
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
 export const BookingImage = styled.img`
-  width: 100px;
-  height: 80px;
-  object-fit: cover;
+  width: 80px;
+  height: 60px;
   border-radius: ${({ theme }) => theme.borderRadius.button};
+  object-fit: cover;
   flex-shrink: 0;
 `;
 
 export const BookingImagePlaceholder = styled.div`
-  width: 100px;
-  height: 80px;
-  background: ${({ theme }) => theme.colors.background};
+  width: 80px;
+  height: 60px;
   border-radius: ${({ theme }) => theme.borderRadius.button};
-  flex-shrink: 0;
+  background: ${({ theme }) => theme.colors.card};
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: ${({ theme }) => theme.typography.fontSize.xs};
   color: ${({ theme }) => theme.colors.status.disabled};
+  flex-shrink: 0;
 `;
 
 export const BookingDetails = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
-  flex: 1;
-  min-width: 0;
 `;
 
-export const BookingVenueName = styled.h3`
+export const BookingVenueName = styled.span`
   font-family: ${({ theme }) => theme.typography.fontFamily.heading};
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
   color: ${({ theme }) => theme.colors.text};
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
-export const BookingDates = styled.p`
+export const BookingDates = styled.span`
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  color: ${({ theme }) => theme.colors.status.disabled};
-  margin: 0;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const BookingGuests = styled.span`
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.status.disabled};
 `;
 
-export const BookingStatus = styled.span<{ $isPast: boolean }>`
+interface BookingStatusProps {
+  $isPast?: boolean;
+}
+
+export const BookingStatus = styled.span<BookingStatusProps>`
   display: inline-block;
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
   background: ${({ theme, $isPast }) =>
-    $isPast ? theme.colors.status.disabled : theme.colors.status.successLight};
+    $isPast ? theme.colors.background : theme.colors.status.successLight};
   color: ${({ theme, $isPast }) =>
-    $isPast ? theme.colors.white : theme.colors.status.success};
+    $isPast ? theme.colors.status.disabled : theme.colors.status.success};
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeight.medium};
   border-radius: ${({ theme }) => theme.borderRadius.button};
-  align-self: flex-start;
-`;
-
-export const EmptyState = styled.div`
-  text-align: center;
-  padding: ${({ theme }) => theme.spacing.xl};
-  color: ${({ theme }) => theme.colors.status.disabled};
-  font-family: ${({ theme }) => theme.typography.fontFamily.body};
-`;
-
-export const LoadingState = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
+  width: fit-content;
 `;
 
 export const ViewButton = styled.button`
   background: none;
-  border: none;
-  color: ${({ theme }) => theme.colors.brand.primary};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.text};
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  border-radius: ${({ theme }) => theme.borderRadius.button};
   cursor: pointer;
-  padding: 0;
-  align-self: flex-start;
+  transition: all ${({ theme }) => theme.transitions.fast};
+  flex-shrink: 0;
 
   &:hover {
-    text-decoration: underline;
+    border-color: ${({ theme }) => theme.colors.brand.primary};
+    color: ${({ theme }) => theme.colors.brand.primary};
   }
 `;
 

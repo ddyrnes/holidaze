@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import BookingPage from "./pages/BookingPage";
+import BookingConfirmationPage from "./pages/BookingConfirmationPage";
 import ManagerVenuesPage from "./pages/ManagerVenuesPage";
 import CreateVenuePage from "./pages/CreateVenuePage";
 import EditVenuePage from "./pages/EditVenuePage";
@@ -27,6 +28,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/booking/confirmation"
+            element={
+              <ProtectedRoute>
+                <BookingConfirmationPage />
               </ProtectedRoute>
             }
           />
