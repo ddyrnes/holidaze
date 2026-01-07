@@ -35,7 +35,7 @@ export const getUserBookings = async (name: string): Promise<{ data: Booking[] }
 
 export const getUserVenues = async (name: string): Promise<{ data: Venue[] }> => {
   return apiClient.get<{ data: Venue[] }>(
-    `${API_ENDPOINTS.profiles.venues(name)}?_bookings=true`,
+    `${API_ENDPOINTS.profiles.venues(name)}?_bookings=true&_customer=true`,
     true
   );
 };
