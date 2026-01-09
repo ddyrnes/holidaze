@@ -39,6 +39,10 @@ class ApiClient {
       throw new ApiError(response.status, response.statusText, errorData.errors);
     }
 
+    if (response.status === 204) {
+      return undefined as T;
+    }
+
     const data = await response.json();
     return data;
   }

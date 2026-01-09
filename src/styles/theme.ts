@@ -3,6 +3,8 @@ export const theme = {
     background: "#F7F5F0",
     card: "#FFFFFF",
     text: "#1E293B",
+    textLight: "#64748B",
+    border: "#E2E8F0",
     
     brand: {
       primary: "#007C91",
