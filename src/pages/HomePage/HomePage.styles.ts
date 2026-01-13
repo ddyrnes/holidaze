@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing.lg} 0;
 `;
 
 export const Hero = styled.section`
@@ -55,3 +55,8 @@ export const VenueCount = styled.span`
   color: ${({ theme }) => theme.colors.status.disabled};
 `;
 
+export const LoadMoreWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${({ theme }) => theme.spacing.xl};
+`;

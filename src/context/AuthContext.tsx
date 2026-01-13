@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import * as authApi from "../services/api/auth";
 import type { AuthResponse } from "../types/api.types";
 
@@ -34,32 +34,32 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+function getInitialUser(): User | null {
+  const storedUser = localStorage.getItem("user");
+  const token = localStorage.getItem("accessToken");
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    const token = localStorage.getItem("accessToken");
-
-    if (storedUser && token) {
-      try {
-        const userData = JSON.parse(storedUser);
-        setUser({
-          name: userData.name,
-          email: userData.email,
-          bio: userData.bio,
-          avatar: userData.avatar,
-          banner: userData.banner,
-          venueManager: userData.venueManager ?? false,
-        });
-      } catch {
-        localStorage.removeItem("user");
-        localStorage.removeItem("accessToken");
-      }
+  if (storedUser && token) {
+    try {
+      const userData = JSON.parse(storedUser);
+      return {
+        name: userData.name,
+        email: userData.email,
+        bio: userData.bio,
+        avatar: userData.avatar,
+        banner: userData.banner,
+        venueManager: userData.venueManager ?? false,
+      };
+    } catch {
+      localStorage.removeItem("user");
+      localStorage.removeItem("accessToken");
     }
-    setIsLoading(false);
-  }, []);
+  }
+  return null;
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [user, setUser] = useState<User | null>(getInitialUser);
+  const [isLoading] = useState(false);
 
   const login = async (email: string, password: string) => {
     const response: AuthResponse = await authApi.login({ email, password });
@@ -110,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {

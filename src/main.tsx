@@ -19,12 +19,17 @@ createRoot(document.getElementById("root")!).render(
       </ErrorBoundary>
       <Toaster
         position="top-right"
+        containerStyle={{
+          top: 80,
+        }}
         toastOptions={{
           duration: 4000,
           style: {
             background: theme.colors.card,
             color: theme.colors.text,
             borderRadius: theme.borderRadius.button,
+            border: `1px solid ${theme.colors.border}`,
+            boxShadow: theme.shadows.card,
           },
           success: {
             iconTheme: {

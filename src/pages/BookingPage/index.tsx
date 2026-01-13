@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getVenueById } from "../../services/api";
 import { createBooking } from "../../services/api/bookings";
@@ -52,8 +52,8 @@ function BookingPage() {
   const [error, setError] = useState<string | null>(null);
   const [guests, setGuests] = useState(1);
 
-  const checkIn = state?.checkIn ? new Date(state.checkIn) : null;
-  const checkOut = state?.checkOut ? new Date(state.checkOut) : null;
+  const checkIn = useMemo(() => state?.checkIn ? new Date(state.checkIn) : null, [state?.checkIn]);
+  const checkOut = useMemo(() => state?.checkOut ? new Date(state.checkOut) : null, [state?.checkOut]);
 
   useEffect(() => {
     const fetchVenue = async () => {
