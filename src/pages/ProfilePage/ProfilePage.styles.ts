@@ -74,6 +74,10 @@ export const Section = styled.section`
   box-shadow: ${({ theme }) => theme.shadows.card};
   padding: ${({ theme }) => theme.spacing.xl};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: ${({ theme }) => theme.spacing.md};
+  }
 `;
 
 export const SectionTitle = styled.h2`
@@ -114,8 +118,16 @@ export const PreviewText = styled.span`
 
 export const ButtonGroup = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.sm};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    button {
+      flex: 1;
+      min-width: 120px;
+    }
+  }
 `;
 
 export const LoadingState = styled.div`
@@ -237,7 +249,3 @@ export const ViewButton = styled.button`
     color: ${({ theme }) => theme.colors.brand.primary};
   }
 `;
-
-
-
-
