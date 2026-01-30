@@ -1,6 +1,6 @@
 # Holidaze
 
-[![Live Demo](https://img.shields.io/badge/demo-live-green)](https://your-netlify-url.netlify.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-green)](https://dd-holidaze.netlify.app)
 
 A modern accommodation booking application built with React for Noroff Project Exam 2.
 
