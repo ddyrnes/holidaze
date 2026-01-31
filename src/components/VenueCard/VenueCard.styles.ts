@@ -118,7 +118,6 @@ export const MetaItem = styled.span<{ $active: boolean }>`
   font-size: ${({ theme }) => theme.typography.fontSize.xs};
   color: ${({ theme, $active }) =>
     $active ? theme.colors.brand.primary : theme.colors.status.disabled};
-  opacity: ${({ $active }) => ($active ? 1 : 0.5)};
 `;
 
 

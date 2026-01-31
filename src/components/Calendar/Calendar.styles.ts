@@ -92,7 +92,7 @@ export const Day = styled.button<DayProps>`
   color: ${({ $isSelected, $isDisabled, $isOutsideMonth, theme }) => {
     if ($isSelected) return theme.colors.white;
     if ($isDisabled) return theme.colors.status.disabled;
-    if ($isOutsideMonth) return `${theme.colors.text}40`;
+    if ($isOutsideMonth) return theme.colors.status.disabled;
     return theme.colors.text;
   }};
   

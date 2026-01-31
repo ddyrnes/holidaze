@@ -7,8 +7,8 @@ export const theme = {
     border: "#E2E8F0",
     
     brand: {
-      primary: "#007C91",
-      hover: "#006776",
+      primary: "#006D7D",
+      hover: "#005A68",
     },
     
     cta: {
@@ -17,24 +17,24 @@ export const theme = {
     },
     
     button: {
-      primary: "#007C91",
-      hover: "#006776",
+      primary: "#006D7D",
+      hover: "#005A68",
     },
     
     status: {
-      success: "#4E9B70",
+      success: "#2D6A4F",
       successLight: "#ECFDF5",
-      successHover: "#3D7A59",
+      successHover: "#1E5038",
       warning: "#E39E3A",
       warningLight: "#FFFBEB",
       warningHover: "#C4872E",
-      error: "#D94F4F",
+      error: "#C43333",
       errorLight: "#FEF2F2",
-      errorHover: "#B91C1C",
+      errorHover: "#A32828",
       info: "#0EA5E9",
       infoLight: "#EFF6FF",
       infoHover: "#0284C7",
-      disabled: "#9BA5A0",
+      disabled: "#5C5F66",
     },
     
     white: "#FFFFFF",
