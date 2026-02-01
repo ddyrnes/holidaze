@@ -48,7 +48,7 @@ Holidaze allows users to browse and book holiday venues, while venue managers ca
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Daniel-Dyrnes/holidaze.git
+   git clone https://github.com/ddyrnes/holidaze.git
    cd holidaze
    ```
 
