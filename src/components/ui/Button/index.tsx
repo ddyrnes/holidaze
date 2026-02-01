@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-type ButtonVariant = "primary" | "secondary" | "danger";
+type ButtonVariant = "primary" | "secondary" | "danger" | "cta" | "ctaOutline";
 
 interface ButtonProps {
   $variant?: ButtonVariant;
@@ -52,6 +52,29 @@ const Button = styled.button<ButtonProps>`
 
           &:hover:not(:disabled) {
             background: ${theme.colors.status.errorHover};
+          }
+        `;
+      case "cta":
+        return css`
+          background: ${theme.colors.cta.primary};
+          color: ${theme.colors.white};
+          border: none;
+          font-size: ${theme.typography.fontSize.lg};
+          font-weight: ${theme.typography.fontWeight.semibold};
+
+          &:hover:not(:disabled) {
+            background: ${theme.colors.cta.hover};
+          }
+        `;
+      case "ctaOutline":
+        return css`
+          background: transparent;
+          color: ${theme.colors.cta.primary};
+          border: 1px solid ${theme.colors.cta.primary};
+
+          &:hover:not(:disabled) {
+            background: ${theme.colors.cta.primary};
+            color: ${theme.colors.white};
           }
         `;
       default:

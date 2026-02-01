@@ -260,7 +260,7 @@ function BookingPage() {
             </TotalRow>
           </PriceSummary>
 
-          <Button type="submit" $fullWidth disabled={isSubmitting}>
+          <Button type="submit" $variant="cta" $fullWidth disabled={isSubmitting}>
             {isSubmitting ? "Confirming..." : "Confirm booking"}
           </Button>
         </BookingForm>

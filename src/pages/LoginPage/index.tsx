@@ -73,7 +73,7 @@ function LoginPage() {
               },
             })}
           />
-          <Button type="submit" $fullWidth disabled={isSubmitting}>
+          <Button type="submit" $variant="cta" $fullWidth disabled={isSubmitting}>
             {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </S.Form>

@@ -27,6 +27,10 @@ export const Logo = styled(Link)`
     color: ${({ theme }) => theme.colors.white};
     margin: 0;
   }
+
+  &:hover h1 {
+    color: ${({ theme }) => theme.colors.white};
+  }
 `;
 
 export const MobileControls = styled.div`
@@ -219,7 +223,7 @@ export const MobileAuthButton = styled(Link)`
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
   color: ${({ theme }) => theme.colors.white};
-  background: ${({ theme }) => theme.colors.brand.primary};
+  background: ${({ theme }) => theme.colors.cta.primary};
   text-decoration: none;
   padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.button};
@@ -228,7 +232,8 @@ export const MobileAuthButton = styled(Link)`
   transition: all ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.brand.hover};
+    background: ${({ theme }) => theme.colors.cta.hover};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -256,10 +261,13 @@ export const NavLink = styled(Link)`
   font-size: ${({ theme }) => theme.typography.fontSize.base};
   color: ${({ theme }) => theme.colors.white};
   text-decoration: none;
-  transition: opacity ${({ theme }) => theme.transitions.fast};
+  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+  border-radius: ${({ theme }) => theme.borderRadius.button};
+  transition: all ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.1);
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -343,14 +351,15 @@ export const AuthLink = styled(Link)`
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
+    color: ${({ theme }) => theme.colors.white};
   }
 `;
 
 export const AuthButton = styled(Link)`
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.sm};
-  color: ${({ theme }) => theme.colors.brand.primary};
-  background: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.cta.primary};
   text-decoration: none;
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.md}`};
   border-radius: ${({ theme }) => theme.borderRadius.button};
@@ -358,6 +367,7 @@ export const AuthButton = styled(Link)`
   transition: all ${({ theme }) => theme.transitions.fast};
 
   &:hover {
-    opacity: 0.9;
+    background: ${({ theme }) => theme.colors.cta.hover};
+    color: ${({ theme }) => theme.colors.white};
   }
 `;

@@ -339,13 +339,13 @@ function VenueDetailPage() {
                 state={{ checkIn: checkIn?.toISOString(), checkOut: checkOut?.toISOString() }}
                 style={{ textDecoration: "none" }}
               >
-                <Button $fullWidth disabled={!checkIn || !checkOut}>
+                <Button $variant="cta" $fullWidth disabled={!checkIn || !checkOut}>
                   {checkIn && checkOut ? "Book this venue" : "Select dates"}
                 </Button>
               </Link>
             ) : (
               <Link to="/login" state={{ from: `/venues/${venue.id}` }} style={{ textDecoration: "none" }}>
-                <Button $fullWidth>Login to book</Button>
+                <Button $variant="cta" $fullWidth>Login to book</Button>
               </Link>
             )}
           </BookingCard>

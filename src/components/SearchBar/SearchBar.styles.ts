@@ -8,19 +8,29 @@ export const SearchWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const SearchIcon = styled.svg`
+export const SearchIconWrapper = styled.div`
   position: absolute;
-  left: ${({ theme }) => theme.spacing.md};
-  width: 20px;
-  height: 20px;
-  color: ${({ theme }) => theme.colors.status.disabled};
+  left: ${({ theme }) => theme.spacing.sm};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: ${({ theme }) => theme.colors.cta.primary};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
   pointer-events: none;
+`;
+
+export const SearchIcon = styled.svg`
+  width: 18px;
+  height: 18px;
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const SearchInput = styled.input`
   width: 100%;
   padding: ${({ theme }) => theme.spacing.md};
-  padding-left: ${({ theme }) => theme.spacing["2xl"]};
+  padding-left: 56px;
   padding-right: ${({ theme }) => theme.spacing["2xl"]};
   font-family: ${({ theme }) => theme.typography.fontFamily.body};
   font-size: ${({ theme }) => theme.typography.fontSize.base};

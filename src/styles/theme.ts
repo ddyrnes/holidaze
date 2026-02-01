@@ -12,8 +12,8 @@ export const theme = {
     },
     
     cta: {
-      primary: "#FF6B6B",
-      hover: "#E85C5C",
+      primary: "#D04040",
+      hover: "#C43C3C",
     },
     
     button: {
@@ -28,9 +28,9 @@ export const theme = {
       warning: "#E39E3A",
       warningLight: "#FFFBEB",
       warningHover: "#C4872E",
-      error: "#C43333",
+      error: "#C62828",
       errorLight: "#FEF2F2",
-      errorHover: "#A32828",
+      errorHover: "#B71C1C",
       info: "#0EA5E9",
       infoLight: "#EFF6FF",
       infoHover: "#0284C7",

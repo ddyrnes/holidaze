@@ -293,7 +293,7 @@ function CreateVenuePage() {
           <Button type="button" $variant="secondary" onClick={() => navigate("/manager/venues")}>
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" $variant="cta" disabled={isSubmitting}>
             {isSubmitting ? "Creating..." : "Create Venue"}
           </Button>
         </ButtonGroup>

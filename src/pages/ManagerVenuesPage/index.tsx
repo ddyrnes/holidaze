@@ -140,7 +140,7 @@ function ManagerVenuesPage() {
           My Venues
           <VenueCount>({venues.length})</VenueCount>
         </Title>
-        <Button onClick={() => navigate("/manager/venues/create")}>
+        <Button $variant="cta" onClick={() => navigate("/manager/venues/create")}>
           Create New Venue
         </Button>
       </Header>
@@ -149,7 +149,7 @@ function ManagerVenuesPage() {
         <EmptyState>
           <EmptyTitle>No venues yet</EmptyTitle>
           <EmptyText>Create your first venue to start accepting bookings.</EmptyText>
-          <Button onClick={() => navigate("/manager/venues/create")}>
+          <Button $variant="cta" onClick={() => navigate("/manager/venues/create")}>
             Create Your First Venue
           </Button>
         </EmptyState>

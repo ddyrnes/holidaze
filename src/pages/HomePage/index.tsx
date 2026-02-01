@@ -135,7 +135,7 @@ function HomePage() {
             {hasMore && !showLoading && !searchQuery && (
               <LoadMoreWrapper>
                 <Button 
-                  $variant="secondary" 
+                  $variant="cta" 
                   onClick={handleLoadMore}
                   disabled={isLoadingMore}
                 >

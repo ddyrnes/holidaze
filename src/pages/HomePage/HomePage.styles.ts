@@ -32,7 +32,6 @@ export const HeroSubtitle = styled.p`
 `;
 
 export const Section = styled.section`
-  margin-bottom: ${({ theme }) => theme.spacing["2xl"]};
 `;
 
 export const SectionHeader = styled.div`
@@ -58,5 +57,5 @@ export const VenueCount = styled.span`
 export const LoadMoreWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${({ theme }) => theme.spacing.xl};
+  margin: 40px 0;
 `;

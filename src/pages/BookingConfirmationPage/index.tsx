@@ -101,7 +101,7 @@ function BookingConfirmationPage() {
       </BookingCard>
 
       <ButtonGroup>
-        <Button onClick={() => navigate("/profile")}>
+        <Button $variant="cta" onClick={() => navigate("/profile")}>
           View my bookings
         </Button>
         <Button $variant="secondary" onClick={() => navigate("/")}>
