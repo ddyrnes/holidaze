@@ -12,8 +12,8 @@ export const theme = {
     },
     
     cta: {
-      primary: "#D04040",
-      hover: "#C43C3C",
+      primary: "#C94545",
+      hover: "#B83939",
     },
     
     button: {
