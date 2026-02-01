@@ -28,7 +28,7 @@ export const theme = {
       warning: "#E39E3A",
       warningLight: "#FFFBEB",
       warningHover: "#C4872E",
-      error: "#C62828",
+      error: "#D32F2F",
       errorLight: "#FEF2F2",
       errorHover: "#B71C1C",
       info: "#0EA5E9",
